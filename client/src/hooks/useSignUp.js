@@ -7,7 +7,6 @@ const useSignUp = () => {
     const { setAuthUser } = useAuthContext();
 
     const signUp = async ({ fullName, username, email, password, confirmPassword }) => {
-
         setLoading(true);
 
         try {
@@ -20,7 +19,7 @@ const useSignUp = () => {
             const data = await res.json();
 
             if (data.error) {
-                throw new Error(data.error)
+                throw new Error(data.error);
             };
 
             localStorage.setItem("current-user", JSON.stringify(data));
@@ -28,7 +27,6 @@ const useSignUp = () => {
         } catch (error) {
             //Add react-hot-toast error handling
             console.log("Error:", error.message);
-
         } finally {
             setLoading(false);
         }

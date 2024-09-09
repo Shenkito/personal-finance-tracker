@@ -30,7 +30,6 @@ function App() {
                 <Route path="*" element={<Navigate to={authUser ? "/" : "/login"} />} />
             </Routes>
         </div>
-        
     );
 }
 

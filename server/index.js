@@ -5,7 +5,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/authRoutes.js"
-
 import connectToMongoDB from "./db/connectToMongoDB.js";
 
 dotenv.config();
