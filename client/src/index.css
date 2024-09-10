@@ -1,43 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* index.css */
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #1E1E2F;
-    color: #FFFFFF;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-    font-weight: 600;
-    color: #FFFFFF;
-}
-
-p {
-    margin: 0 0 1.5rem;
-    color: #A5A6F6;
-}
-
-a {
-    color: #6C63FF;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #FF6584;
-}
 
