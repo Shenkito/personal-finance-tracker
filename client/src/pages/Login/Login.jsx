@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useLogin from "../../hooks/useLogin"; // Assuming you have a custom hook for login
 
 const Login = () => {
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const { loading, login } = useLogin();
-    const navigate = useNavigate();
+
+    // const navigate = useNavigate();
 
     const handleLogin = async (e) => {
+
         e.preventDefault();
 
         await login(username, password);
-        navigate('/'); // Navigate to the dashboard after successful login
+
+        // navigate('/'); // Navigate to the dashboard after successful login
+
     };
 
     return (
@@ -25,11 +30,10 @@ const Login = () => {
                         <label className="block text-gray-400">Username</label>
                         <input
                             type="text"
-                            placeholder="Enter username"
-                            className="w-full p-2 mt-2 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            placeholder="Enter Username"
+                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -37,10 +41,9 @@ const Login = () => {
                         <input
                             type="password"
                             placeholder="Enter Password"
-                            className="w-full p-2 mt-2 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            required
                         />
                     </div>
                     <button
@@ -54,7 +57,7 @@ const Login = () => {
                 <p className="text-gray-400 mt-4 text-center">
                     Don't have an account?{' '}
                     <Link to="/signup" className="text-purple-500 hover:underline">
-                        Sign up
+                        Sign Up
                     </Link>
                 </p>
             </div>

@@ -1,6 +1,7 @@
 import { useAuthContext } from "../../context/AuthContext";
 
 const ProfilePicture = () => {
+    
     const { authUser } = useAuthContext();
 
     return (

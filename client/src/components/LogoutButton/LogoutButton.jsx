@@ -1,21 +1,21 @@
-import { useAuthContext } from "../../context/AuthContext";
+import useLogout from "../../hooks/useLogout";
 
 const LogoutButton = () => {
-    const { setAuthUser } = useAuthContext();
 
-    const handleLogout = () => {
-        // Clear user data and log out
-        setAuthUser(null);
-        localStorage.removeItem("current-user");
-        window.location.href = "/login"; // Redirect to login page
-    };
+    const { loading, logout } = useLogout();
 
     return (
         <button
-            onClick={handleLogout}
-            className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition duration-200"
+            onClick={logout}
+            disabled={loading} // Disable button when loading
+            className={`w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition duration-200 flex items-center justify-center ${loading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
         >
-            Logout
+            {loading ? (
+                <span className="loading loading-spinner"></span> // Show spinner while loading
+            ) : (
+                'Logout' // Show 'Logout' text when not loading
+            )}
         </button>
     );
 };

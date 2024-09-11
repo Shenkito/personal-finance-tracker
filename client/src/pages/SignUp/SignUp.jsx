@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useSignUp from "../../hooks/useSignUp";
 
 const SignUp = () => {
+
     const [inputs, setInputs] = useState({
         fullName: '',
         username: '',
@@ -12,25 +13,25 @@ const SignUp = () => {
     });
 
     const { loading, signUp } = useSignUp();
-    const navigate = useNavigate();
+
+    // const navigate = useNavigate();
 
     const handleChange = (e) => {
+
         setInputs({
             ...inputs,
             [e.target.name]: e.target.value,
         });
+
     };
 
     const handleSignup = async (e) => {
+
         e.preventDefault();
 
-        if (inputs.password !== inputs.confirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
-
         await signUp(inputs);
-        navigate('/');
+
+        // navigate('/');
     };
 
     return (
@@ -43,10 +44,9 @@ const SignUp = () => {
                         <input
                             type="text"
                             name="fullName"
-                            className="w-full p-2 mt-2 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.fullName}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -54,10 +54,9 @@ const SignUp = () => {
                         <input
                             type="text"
                             name="username"
-                            className="w-full p-2 mt-2 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.username}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -65,10 +64,9 @@ const SignUp = () => {
                         <input
                             type="email"
                             name="email"
-                            className="w-full p-2 mt-2 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.email}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -76,10 +74,9 @@ const SignUp = () => {
                         <input
                             type="password"
                             name="password"
-                            className="w-full p-2 mt-2 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.password}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -87,10 +84,9 @@ const SignUp = () => {
                         <input
                             type="password"
                             name="confirmPassword"
-                            className="w-full p-2 mt-2 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.confirmPassword}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <button
