@@ -19,7 +19,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6
-    }
+    },
+    transactions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Transaction'
+    }]
     // we get createdAt , updatedAt => can use for Member since. 
 }, { timestamps: true });
 
