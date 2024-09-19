@@ -35,71 +35,78 @@ const SignUp = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-800 p-4">
-            <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h2 className="text-2xl font-bold text-white text-center">Sign Up</h2>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-700 to-blue-500 p-4">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md transform hover:scale-105 transition duration-300">
+                <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
+                    Create an Account
+                </h2>
                 <form onSubmit={handleSignup} className="mt-6">
                     <div className="mb-4">
-                        <label className="block text-gray-400">Full Name</label>
+                        <label className="block text-gray-600 font-semibold">Full Name</label>
                         <input
                             type="text"
                             name="fullName"
-                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            placeholder="Enter Full Name"
+                            className="w-full p-3 mt-2 bg-gray-200 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.fullName}
                             onChange={handleChange}
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-400">Username</label>
+                        <label className="block text-gray-600 font-semibold">Username</label>
                         <input
                             type="text"
                             name="username"
-                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            placeholder="Enter Username"
+                            className="w-full p-3 mt-2 bg-gray-200 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.username}
                             onChange={handleChange}
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-400">Email</label>
+                        <label className="block text-gray-600 font-semibold">Email</label>
                         <input
                             type="email"
                             name="email"
-                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            placeholder="Enter Email"
+                            className="w-full p-3 mt-2 bg-gray-200 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.email}
                             onChange={handleChange}
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-400">Password</label>
+                        <label className="block text-gray-600 font-semibold">Password</label>
                         <input
                             type="password"
                             name="password"
-                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            placeholder="Enter Password"
+                            className="w-full p-3 mt-2 bg-gray-200 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.password}
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-400">Confirm Password</label>
+                    <div className="mb-6">
+                        <label className="block text-gray-600 font-semibold">Confirm Password</label>
                         <input
                             type="password"
                             name="confirmPassword"
-                            className="w-full p-2 mt-2 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            placeholder="Confirm Password"
+                            className="w-full p-3 mt-2 bg-gray-200 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.confirmPassword}
                             onChange={handleChange}
                         />
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-200"
+                        className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition duration-300"
                         disabled={loading}
                     >
                         {loading ? "Signing up..." : "Sign Up"}
                     </button>
                 </form>
-                <p className="text-gray-400 mt-4 text-center">
-                    Already have an account?{' '}
-                    <Link to="/login" className="text-purple-500 hover:underline">
+                <p className="text-gray-500 mt-6 text-center">
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-purple-600 hover:underline">
                         Login
                     </Link>
                 </p>

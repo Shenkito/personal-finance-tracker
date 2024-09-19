@@ -4,16 +4,16 @@ import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Sidebar = () => {
     return (
-        <div className="w-64 bg-gray-800 text-white flex flex-col">
-            <div className="p-4 border-b border-gray-700">
+        <div className="w-64 bg-gray-800 text-white flex flex-col justify-between min-h-screen shadow-lg">
+            <div className="p-6 border-b border-gray-700">
                 <ProfilePicture />
             </div>
-            <nav className="flex-1 p-4">
+            <nav className="flex-1 p-6 space-y-4">
                 <NavLink to="/dashboard">Dashboard</NavLink>
                 <NavLink to="/budgets">Budgets</NavLink>
                 <NavLink to="/expenses">Expenses</NavLink>
             </nav>
-            <div className="p-4 border-t border-gray-700">
+            <div className="p-6 border-t border-gray-700">
                 <LogoutButton />
             </div>
         </div>
