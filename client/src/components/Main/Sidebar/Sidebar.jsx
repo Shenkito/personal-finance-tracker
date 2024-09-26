@@ -1,6 +1,6 @@
-import ProfilePicture from "../ProfilePicture/ProfilePicture";
-import NavLink from "../NavLink/NavLink";
-import LogoutButton from "../LogoutButton/LogoutButton";
+import ProfilePicture from "../../Main/ProfilePicture/ProfilePicture";
+import NavLink from "../../Main/NavLink/NavLink";
+import LogoutButton from "../../Main/LogoutButton/LogoutButton";
 
 const Sidebar = () => {
     return (

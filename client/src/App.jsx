@@ -8,7 +8,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Budgets from "./pages/Budgets/Budgets";
 import Expenses from "./pages/Expenses/Expenses";
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/Main/Layout/Layout";
 
 function App() {
 
