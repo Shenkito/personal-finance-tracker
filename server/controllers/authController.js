@@ -7,6 +7,7 @@ export const signUp = async (req, res) => {
     try {
 
         const { fullName, username, email, password, confirmPassword } = req.body;
+        const profilePicture = req.file ? `${req.file.filename}` : "";
 
         if (password !== confirmPassword) {
 
@@ -32,6 +33,7 @@ export const signUp = async (req, res) => {
             username: username,
             email: email,
             password: hashedPassword,
+            profilePicture
 
         });
 
@@ -46,8 +48,8 @@ export const signUp = async (req, res) => {
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 username: newUser.username,
-                email: newUser.email
-
+                email: newUser.email,
+                profilePicture: newUser.profilePicture,
             });
         } else {
 
@@ -86,6 +88,7 @@ export const login = async (req, res) => {
             _id: user._id,
             fullName: user.fullName,
             username: user.username,
+            profilePicture: user.profilePicture
 
         });
 

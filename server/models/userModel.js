@@ -20,6 +20,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 6
     },
+    profilePicture: {
+        type: String
+    },
     transactions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Transaction'

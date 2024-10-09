@@ -9,7 +9,7 @@ const useSignUp = () => {
 
     const { setAuthUser } = useAuthContext();
 
-    const signUp = async ({ fullName, username, email, password, confirmPassword }) => {
+    const signUp = async ({ fullName, username, email, password, confirmPassword }, file) => {
 
         const success = handleInputErrors({ fullName, username, email, password, confirmPassword })
 
@@ -18,12 +18,20 @@ const useSignUp = () => {
         setLoading(true);
 
         try {
+            const formData = new FormData();
+            formData.append("fullName", fullName);
+            formData.append("username", username);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("confirmPassword", confirmPassword);
+            if (file) {
+                formData.append("profilePicture", file); // Append the file
+            }
 
             const res = await fetch("/api/auth/signup", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ fullName, username, email, password, confirmPassword })
-            })
+                body: formData, // Send FormData
+            });
 
             const data = await res.json();
 
@@ -31,7 +39,7 @@ const useSignUp = () => {
 
                 throw new Error(data.error);
 
-            };
+            }
 
             localStorage.setItem("current-user", JSON.stringify(data));
 
@@ -44,9 +52,10 @@ const useSignUp = () => {
         } finally {
 
             setLoading(false);
-
+            
         }
-    }
+    };
+
 
     return { loading, signUp };
 }

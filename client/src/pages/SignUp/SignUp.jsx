@@ -12,6 +12,8 @@ const SignUp = () => {
         confirmPassword: '',
     });
 
+    const [file, setFile] = useState(null); // State to hold the uploaded file
+
     const { loading, signUp } = useSignUp();
 
     // const navigate = useNavigate();
@@ -25,11 +27,17 @@ const SignUp = () => {
 
     };
 
+    const handleFileChange = (e) => {
+
+        setFile(e.target.files[0]); // Set the selected file
+        
+    };
+
     const handleSignup = async (e) => {
 
         e.preventDefault();
 
-        await signUp(inputs);
+        await signUp(inputs, file);
 
         // navigate('/');
     };
@@ -94,6 +102,14 @@ const SignUp = () => {
                             className="w-full p-3 mt-2 bg-gray-200 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                             value={inputs.confirmPassword}
                             onChange={handleChange}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-600 font-semibold">Profile Picture</label>
+                        <input
+                            type="file"
+                            onChange={handleFileChange}
+                            className="w-full p-3 mt-2 bg-gray-200 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                         />
                     </div>
                     <button
