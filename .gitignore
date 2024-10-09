@@ -42,6 +42,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Folder with uploaded files which is in server folder
+uploads/
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 

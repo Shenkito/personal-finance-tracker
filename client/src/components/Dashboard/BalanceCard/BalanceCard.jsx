@@ -1,11 +1,11 @@
 import useTransactions from "../../../hooks/useTransactions";
 import { calculateBalance } from "../../../utils/calculateBalance";
 
-const BalanceCard = () => {
+const BalanceCard = (transactions) => {
 
-    const { transactions, loading, error } = useTransactions();
+    // const { transactions, loading, error } = useTransactions();
 
-    const balance = calculateBalance(transactions);
+    const balance = calculateBalance(transactions.transactions);
 
     return (
         <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-between">

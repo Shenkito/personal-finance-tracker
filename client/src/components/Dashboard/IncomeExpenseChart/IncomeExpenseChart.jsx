@@ -4,12 +4,12 @@ import useTransactions from "../../../hooks/useTransactions";
 
 const COLORS = ['#28a745', '#dc3545']; // Green for income, Red for expenses
 
-const IncomeExpenseChart = () => {
+const IncomeExpenseChart = (transactions) => {
 
-    const { transactions, loading, error } = useTransactions();
+    // const { transactions, loading, error } = useTransactions();
 
-    const totalIncome = calculateTotalIncome(transactions);
-    const totalExpenses = calculateTotalExpenses(transactions);
+    const totalIncome = calculateTotalIncome(transactions.transactions);
+    const totalExpenses = calculateTotalExpenses(transactions.transactions);
 
     const data = [
         { name: 'Income', value: totalIncome },

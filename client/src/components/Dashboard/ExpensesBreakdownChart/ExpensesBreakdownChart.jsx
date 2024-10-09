@@ -3,11 +3,11 @@ import useTransactions from "../../../hooks/useTransactions";
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const ExpensesBreakdownChart = () => {
+const ExpensesBreakdownChart = (transactions) => {
 
-    const { transactions, loading, error } = useTransactions();
+    // const { transactions, loading, error } = useTransactions();
 
-    const expenseData = transactions.map((transaction) => ({
+    const expenseData = transactions.transactions.map((transaction) => ({
         name: transaction.category,
         value: transaction.amount,
     }));
