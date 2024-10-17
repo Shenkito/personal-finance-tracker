@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/authRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
-import uploadRoutes from "./routes/uploadRoutes.js"
+// import uploadRoutes from "./routes/uploadRoutes.js"
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
 
@@ -32,7 +32,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
-app.use("/api/upload", uploadRoutes)
+// app.use("/api/upload", uploadRoutes)
 
 const PORT = process.env.PORT || 5000;
 
