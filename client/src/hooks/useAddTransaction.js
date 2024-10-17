@@ -1,16 +1,16 @@
-// src/hooks/useAddTransaction.js
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useStore from "../store/useStore";
 
 const useAddTransaction = () => {
 
-    const { addTransaction } = useStore();
+    const { transactions, setTransactions } = useStore();
 
     const [loading, setLoading] = useState(false);
 
-    const add = async (newTransaction) => {
+    const addTransaction = async (newTransaction) => {
 
         try {
+
             setLoading(true);
 
             const response = await fetch("/api/transactions", {
@@ -19,11 +19,16 @@ const useAddTransaction = () => {
                 body: JSON.stringify(newTransaction),
             });
 
-            if (!response.ok) throw new Error("Failed to create transaction");
+            if (!response.ok) {
+
+                throw new Error("Failed to create transaction");
+
+            }
 
             const createdTransaction = await response.json();
 
-            addTransaction(createdTransaction);
+            // Update the transactions state by adding the new transaction
+            setTransactions([...transactions, createdTransaction]);
 
         } catch (error) {
 
@@ -36,7 +41,7 @@ const useAddTransaction = () => {
         }
     };
 
-    return { addTransaction: add, loading };
+    return { addTransaction, loading };
 };
 
 export default useAddTransaction;

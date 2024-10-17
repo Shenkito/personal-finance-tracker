@@ -1,6 +1,6 @@
-// src/hooks/useTransactions.js
-import { useEffect, useState } from "react";
 import useStore from "../store/useStore";
+import { useEffect, useState } from "react";
+import { getLatestTransaction } from "../utils/getLatestTransactions"; // Import the utility function
 
 const useTransactions = () => {
 
@@ -9,6 +9,7 @@ const useTransactions = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Fetch transactions from the server
     const fetchTransactions = async () => {
 
         try {
@@ -25,14 +26,19 @@ const useTransactions = () => {
             setLoading(false);
 
         }
-
     };
 
+    // Recalculate `lastUpdated` whenever `transactions` state changes
     useEffect(() => {
+
         fetchTransactions();
+
     }, []);
 
-    return { transactions, loading, error };
+    // Dynamically calculate the last updated date from the transactions
+    const lastUpdated = transactions.length > 0 ? getLatestTransaction(transactions)?.createdAt : null;
+
+    return { transactions, loading, error, lastUpdated };
 };
 
 export default useTransactions;
