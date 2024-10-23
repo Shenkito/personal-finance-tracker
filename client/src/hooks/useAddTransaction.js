@@ -11,6 +11,10 @@ const useAddTransaction = () => {
 
     const addTransaction = async (newTransaction) => {
 
+        const success = handleInputErrors(newTransaction);
+
+        if (!success) return;
+
         try {
 
             setLoading(true);
@@ -47,3 +51,23 @@ const useAddTransaction = () => {
 };
 
 export default useAddTransaction;
+
+function handleInputErrors({ amount, description }) {
+
+    if (!amount || !description) {
+
+        toast.error("Please fill in all required fields");
+
+        return false;
+
+    }
+
+    if (amount <= 0) {
+        
+        toast.error("Amount should be greater than 0");
+
+        return false;
+    }
+
+    return true;
+}

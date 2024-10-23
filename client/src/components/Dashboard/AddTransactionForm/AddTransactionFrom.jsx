@@ -69,7 +69,6 @@ const AddTransactionForm = () => {
                     onChange={handleFormChange}
                     placeholder="Amount"
                     className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                    required
                 />
                 <input
                     type="text"
@@ -78,7 +77,6 @@ const AddTransactionForm = () => {
                     onChange={handleFormChange}
                     placeholder="Description"
                     className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                    required
                 />
                 <select
                     name="category"
