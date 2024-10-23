@@ -13,7 +13,7 @@ const ExpensesBreakdownChart = (transactions) => {
     }));
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="bg-white p-6 rounded-lg shadow-lg mt-6">
             <h2 className="text-lg font-semibold mb-2 text-gray-700 truncate">Expenses Breakdown</h2>
             <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
