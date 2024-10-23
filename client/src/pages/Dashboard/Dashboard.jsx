@@ -5,12 +5,18 @@ import RecentTransactionsCard from "../../components/Dashboard/RecentTransaction
 import ExpensesBreakdownChart from "../../components/Dashboard/ExpensesBreakdownChart/ExpensesBreakdownChart";
 import IncomeExpenseChart from "../../components/Dashboard/IncomeExpenseChart/IncomeExpenseChart";
 import AddTransactionForm from "../../components/Dashboard/AddTransactionForm/AddTransactionFrom";
+import LoadingSpinner from "../../components/Common/LoadingSpinner/LoadingSpinner";
 
 const Dashboard = () => {
 
     const { transactions, loading, error, lastUpdated } = useTransactions();
 
-    if (loading) return <p className="text-gray-600">Loading transactions...</p>;
+    if (loading) {
+
+        return <LoadingSpinner />
+
+    }
+
     if (error) return <p className="text-red-500">Error fetching transactions: {error}</p>;
 
     return (
