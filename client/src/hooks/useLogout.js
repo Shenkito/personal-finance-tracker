@@ -34,7 +34,7 @@ const useLogout = () => {
 
         } catch (error) {
 
-            toast.error(error.message);
+            toast.error(`Error logout: ${error.message}`);
 
         } finally {
 

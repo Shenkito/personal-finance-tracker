@@ -47,7 +47,7 @@ const useSignUp = () => {
 
         } catch (error) {
 
-            toast.error(error.message);
+            toast.error(`Error signing up: ${error.message}`);
 
         } finally {
 

@@ -9,15 +9,9 @@ import LoadingSpinner from "../../components/Common/LoadingSpinner/LoadingSpinne
 
 const Dashboard = () => {
 
-    const { transactions, loading, error, lastUpdated } = useTransactions();
+    const { transactions, loading, lastUpdated } = useTransactions();
 
-    if (loading) {
-
-        return <LoadingSpinner />
-
-    }
-
-    if (error) return <p className="text-red-500">Error fetching transactions: {error}</p>;
+    if (loading) return <LoadingSpinner />
 
     return (
         <div className="p-4 sm:p-6 lg:p-8">

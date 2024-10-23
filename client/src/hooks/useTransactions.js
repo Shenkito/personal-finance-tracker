@@ -2,12 +2,13 @@ import useStore from "../store/useStore";
 import { useEffect, useState } from "react";
 import { getLatestTransaction } from "../utils/getLatestTransactions"; // Import the utility function
 
+import toast from "react-hot-toast";
+
 const useTransactions = () => {
 
     const { transactions, setTransactions } = useStore();
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     // Fetch transactions from the server
     const fetchTransactions = async () => {
@@ -20,11 +21,14 @@ const useTransactions = () => {
             setTransactions(data);
             setLoading(false);
 
-        } catch (err) {
+        } catch (error) {
 
-            setError(err.message);
+            toast.error(`Error fetching transactions: ${error.message}`);
+
+        } finally {
+
             setLoading(false);
-
+            
         }
     };
 
@@ -38,7 +42,7 @@ const useTransactions = () => {
     // Dynamically calculate the last updated date from the transactions
     const lastUpdated = transactions.length > 0 ? getLatestTransaction(transactions)?.createdAt : null;
 
-    return { transactions, loading, error, lastUpdated };
+    return { transactions, loading, lastUpdated };
 };
 
 export default useTransactions;

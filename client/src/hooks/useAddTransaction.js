@@ -1,6 +1,8 @@
 import { useState } from "react";
 import useStore from "../store/useStore";
 
+import toast from "react-hot-toast";
+
 const useAddTransaction = () => {
 
     const { transactions, setTransactions } = useStore();
@@ -32,7 +34,7 @@ const useAddTransaction = () => {
 
         } catch (error) {
 
-            console.error("Error creating transaction:", error);
+            toast.error(`Error creating transaction: ${error.message}`);
 
         } finally {
 
