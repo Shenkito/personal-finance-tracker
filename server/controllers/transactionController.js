@@ -69,11 +69,11 @@ export const getTransactions = async (req, res) => {
 
 export const deleteTransaction = async (req, res) => {
 
+    const { id } = req.params;
+
     try {
 
-        const { id } = req.params;
-
-        const transaction = await Transaction.findById(id);
+        const transaction = await Transaction.findByIdAndDelete(id);
 
         if (!transaction) {
 
@@ -81,20 +81,12 @@ export const deleteTransaction = async (req, res) => {
 
         }
 
-        if (transaction.user.toString() !== req.user._id.toString()) {
+        res.json({ message: "Transaction deleted successfully" });
 
-            return res.status(403).json({ error: "Unauthorized" });
-
-        }
-
-        await transaction.remove();
-
-        res.status(200).json({ message: "Transaction deleted" });
 
     } catch (error) {
 
         console.log("Error in deleteTransaction controller", error.message);
-
         res.status(500).json({ error: "Internal Server Error" });
 
     }
