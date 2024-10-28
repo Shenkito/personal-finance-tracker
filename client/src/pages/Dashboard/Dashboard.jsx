@@ -1,6 +1,6 @@
 import useTransactions from "../../hooks/useTransactions";
 import BalanceCard from "../../components/Dashboard/BalanceCard/BalanceCard";
-import UpcomingBillsCard from "../../components/Dashboard/UpcomingBillsCard/UpcomingBillsCard";
+import TransactionHistoryCard from "../../components/Dashboard/TransactionsHistoryCard/TransactionsHistoryCard";
 import RecentTransactionsCard from "../../components/Dashboard/RecentTransactionsCard/RecentTransactionsCard";
 import ExpensesBreakdownChart from "../../components/Dashboard/ExpensesBreakdownChart/ExpensesBreakdownChart";
 import IncomeExpenseChart from "../../components/Dashboard/IncomeExpenseChart/IncomeExpenseChart";
@@ -19,7 +19,7 @@ const Dashboard = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <BalanceCard transactions={transactions} lastUpdated={lastUpdated} />
-                <UpcomingBillsCard />
+                <TransactionHistoryCard transactions={transactions} />
                 <RecentTransactionsCard transactions={transactions} />
                 <ExpensesBreakdownChart transactions={transactions} />
                 <IncomeExpenseChart transactions={transactions} />
