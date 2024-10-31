@@ -67,6 +67,52 @@ export const getTransactions = async (req, res) => {
     }
 };
 
+export const editTransaction = async (req, res) => {
+
+    const { id } = req.params;
+
+    const { amount, description, category, type } = req.body;
+
+    // Ensure all required fields are provided
+    if (!amount || !description || !category || !type) {
+
+        return res.status(400).json({ error: "All fields are required" });
+
+    }
+
+    // Ensure amount is a number
+    if (isNaN(amount)) {
+
+        return res.status(400).json({ error: "Amount must be a number" });
+
+    }
+
+    try {
+
+        const updatedTransaction = await Transaction.findByIdAndUpdate(
+            id,
+            { amount, description, category, type }, // Use the correct fields
+            { new: true }
+        );
+
+        if (!updatedTransaction) {
+
+            return res.status(404).json({ message: "Transaction not found" });
+
+        }
+
+        res.json(updatedTransaction);
+
+    } catch (error) {
+
+        console.log("Error in editTransaction controller", error.message);
+
+        res.status(500).json({ error: "Internal Server error" });
+
+    }
+
+};
+
 export const deleteTransaction = async (req, res) => {
 
     const { id } = req.params;

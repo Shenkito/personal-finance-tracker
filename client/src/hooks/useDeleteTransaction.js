@@ -16,7 +16,7 @@ const useDeleteTransaction = () => {
 
         try {
 
-            const response = await fetch(`/api/transactions/${id}`, {
+            const response = await fetch(`/api/transactions/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

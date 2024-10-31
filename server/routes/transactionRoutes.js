@@ -1,16 +1,20 @@
 import express from "express";
-import { createTransaction, getTransactions, deleteTransaction } from "../controllers/transactionController.js";
+import { createTransaction, getTransactions, deleteTransaction, editTransaction } from "../controllers/transactionController.js";
 import protectRoute from "../middleware/protectRoute.js";
 
 const router = express.Router();
 
-// Create a new transaction
-router.post("/", protectRoute, createTransaction);
-
 // Get all transactions for the authenticated user
 router.get("/", protectRoute, getTransactions);
 
+// Create a new transaction
+router.post("/", protectRoute, createTransaction);
+
+// Edit a transaction by ID
+router.put("/edit/:id", protectRoute, editTransaction);
+
 // Delete a transaction by ID
-router.delete("/:id", protectRoute, deleteTransaction);
+router.delete("/delete/:id", protectRoute, deleteTransaction);
+
 
 export default router;

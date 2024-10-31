@@ -11,6 +11,11 @@ const useStore = create((set) => ({
     deleteCurrentTransaction: (id) => set((state) => ({
         transactions: state.transactions.filter((transaction) => transaction._id !== id)
     })),
+    updateTransaction: (updatedTransaction) => set((state) => ({
+        transactions: state.transactions.map((transaction) =>
+            transaction._id === updatedTransaction._id ? updatedTransaction : transaction
+        ),
+    })),
 }));
 
 export default useStore;
