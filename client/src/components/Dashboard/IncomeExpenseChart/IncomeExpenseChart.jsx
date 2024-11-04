@@ -1,13 +1,9 @@
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import { calculateTotalExpenses, calculateTotalIncome } from "../../../utils/calculateTotals";
-import useTransactions from "../../../hooks/useTransactions";
 
 const COLORS = ['#28a745', '#dc3545']; // Green for income, Red for expenses
 
-const IncomeExpenseChart = (transactions) => {
-
-    // const { transactions, loading, error } = useTransactions();
-
+const IncomeExpenseChart = (transactions) => {  // Destructure transactions
     const totalIncome = calculateTotalIncome(transactions.transactions);
     const totalExpenses = calculateTotalExpenses(transactions.transactions);
 
@@ -17,9 +13,9 @@ const IncomeExpenseChart = (transactions) => {
     ];
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-lg mt-6">
+        <div className="bg-white p-6 rounded-lg shadow-lg h-80 flex flex-col"> {/* Flex column layout */}
             <h2 className="text-lg font-semibold mb-4 text-gray-700">Income vs Expenses</h2>
-            <div className="w-full h-64 sm:h-72 lg:h-80">
+            <div className="flex-1"> {/* Make this div flexible to occupy remaining space */}
                 <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                         <Pie
@@ -31,16 +27,25 @@ const IncomeExpenseChart = (transactions) => {
                             fill="#8884d8"
                             paddingAngle={5}
                             dataKey="value"
-                            label
+                            label={({ value }) => `$${value.toFixed(2)}`}
                         >
                             {data.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
                         <Tooltip formatter={(value) => `$${value.toFixed(2)}`} />
-                        <Legend />
                     </PieChart>
                 </ResponsiveContainer>
+            </div>
+            <div className="mt-4"> {/* Add margin to space out the legend */}
+                <div className="flex justify-around"> {/* Flex for even spacing */}
+                    {data.map((entry, index) => (
+                        <div key={index} className="flex items-center">
+                            <div className="w-4 h-4 mr-2" style={{ backgroundColor: COLORS[index], borderRadius: '50%' }} />
+                            <span className="text-sm">{entry.name}</span> {/* Legend item */}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

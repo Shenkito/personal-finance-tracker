@@ -8,7 +8,6 @@ import AddTransactionForm from "../../components/Dashboard/AddTransactionForm/Ad
 import LoadingSpinner from "../../components/Common/LoadingSpinner/LoadingSpinner";
 
 const Dashboard = () => {
-
     const { transactions, loading, lastUpdated } = useTransactions();
 
     if (loading) return <LoadingSpinner />
@@ -21,8 +20,16 @@ const Dashboard = () => {
                 <BalanceCard transactions={transactions} lastUpdated={lastUpdated} />
                 <TransactionHistoryCard transactions={transactions} />
                 <RecentTransactionsCard transactions={transactions} />
-                <ExpensesBreakdownChart transactions={transactions} />
-                <IncomeExpenseChart transactions={transactions} />
+            </div>
+
+            {/* Flex container for the charts */}
+            <div className="flex justify-between gap-6 mt-6">
+                <div className="flex-1">
+                    <ExpensesBreakdownChart transactions={transactions} />
+                </div>
+                <div className="flex-1">
+                    <IncomeExpenseChart transactions={transactions} />
+                </div>
             </div>
 
             <AddTransactionForm />
@@ -30,4 +37,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Dashboard
