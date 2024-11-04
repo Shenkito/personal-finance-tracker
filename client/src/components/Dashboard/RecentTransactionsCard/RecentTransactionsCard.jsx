@@ -6,6 +6,7 @@ const RecentTransactionsCard = ({ transactions }) => {
                 <ul className="space-y-2">
                     {transactions.map((transaction, index) => (
                         <li key={index} className="text-sm text-gray-600">
+                            <p className="font-semibold">{transaction.category}</p>
                             {transaction.description} - ${transaction.amount.toFixed(2)}
                         </li>
                     ))}
