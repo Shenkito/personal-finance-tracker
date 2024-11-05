@@ -2,7 +2,7 @@ import useTransactions from "../../hooks/useTransactions";
 import BalanceCard from "../../components/Dashboard/BalanceCard/BalanceCard";
 import TransactionHistoryCard from "../../components/Dashboard/TransactionsHistoryCard/TransactionsHistoryCard";
 import RecentTransactionsCard from "../../components/Dashboard/RecentTransactionsCard/RecentTransactionsCard";
-import ExpensesBreakdownChart from "../../components/Dashboard/ExpensesBreakdownChart/ExpensesBreakdownChart";
+import BalanceBreakdownChart from "../../components/Dashboard/BalanceBreakdownChart/BalanceBreakdownChart";
 import IncomeExpenseChart from "../../components/Dashboard/IncomeExpenseChart/IncomeExpenseChart";
 import AddTransactionForm from "../../components/Dashboard/AddTransactionForm/AddTransactionFrom";
 import LoadingSpinner from "../../components/Common/LoadingSpinner/LoadingSpinner";
@@ -25,7 +25,7 @@ const Dashboard = () => {
             {/* Flex container for the charts */}
             <div className="flex justify-between gap-6 mt-6">
                 <div className="flex-1">
-                    <ExpensesBreakdownChart transactions={transactions} />
+                    <BalanceBreakdownChart transactions={transactions} />
                 </div>
                 <div className="flex-1">
                     <IncomeExpenseChart transactions={transactions} />
