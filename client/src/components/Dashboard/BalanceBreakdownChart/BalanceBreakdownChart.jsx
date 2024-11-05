@@ -25,7 +25,14 @@ const BalanceBreakdownChart = ({ transactions }) => {
                             <Cell key={`cell-${index}`} fill={entry.color || '#000000'} />
                         ))}
                     </Pie>
-                    <Tooltip formatter={(value, name) => [`$${value.toFixed(2)}`, name]} />
+                    <Tooltip
+                        formatter={(value, name) => {
+                            const categoryData = expenseData.find(entry => entry.category === name);
+                            const type = categoryData ? (categoryData.type === 'income' ? 'Income' : 'Expense') : 'Unknown';
+                            return [`$${value.toFixed(2)}`, `${categoryData?.category || 'Unknown'} (${type})`];
+                        }}
+                    />
+
                 </PieChart>
             </ResponsiveContainer>
         </div>
