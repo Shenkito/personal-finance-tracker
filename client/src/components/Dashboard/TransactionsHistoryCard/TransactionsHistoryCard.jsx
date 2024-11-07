@@ -1,12 +1,9 @@
 import { useState } from "react";
-
 import { toast } from "react-hot-toast";
-
-import useDeleteTransaction from "../../../hooks/useDeleteTransaction";
-import useEditTransaction from "../../../hooks/useEditTransaction";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faCheck, faTimes, faPen } from "@fortawesome/free-solid-svg-icons";
+import useDeleteTransaction from "../../../hooks/useDeleteTransaction";
+import useEditTransaction from "../../../hooks/useEditTransaction";
 
 // Define categories to match AddTransactionForm
 const categories = [
@@ -24,29 +21,41 @@ const categories = [
 const TransactionHistoryCard = ({ transactions }) => {
 
     const { deleteTransaction, loading: deleting } = useDeleteTransaction();
+
     const { editTransaction, loading: editing } = useEditTransaction();
 
     const [editingTransaction, setEditingTransaction] = useState(null);
+
     const [formData, setFormData] = useState({ amount: '', description: '', category: '', type: '' });
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleEdit = (transaction) => {
+
         setEditingTransaction(transaction._id);
+
         setFormData({
             amount: transaction.amount,
             description: transaction.description,
             category: transaction.category,
             type: transaction.type,
         });
+
         setIsModalOpen(true);
     };
 
     const handleSave = async (id) => {
+
         const success = await editTransaction(id, formData);
+
         if (success) {
+
             setIsModalOpen(false);
+
             setEditingTransaction(null);
+
             setFormData({ amount: '', description: '', category: '', type: '' });
+
         }
     };
 
@@ -79,15 +88,19 @@ const TransactionHistoryCard = ({ transactions }) => {
     };
 
     const closeModal = () => {
+
         setIsModalOpen(false);
+
         setEditingTransaction(null);
+
         setFormData({ amount: '', description: '', category: '', type: '' });
+
     };
 
     return (
-        <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col justify-between h-[200px]">
+        <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col justify-between h-[200px] max-h-[200px]">
             <h2 className="text-lg font-semibold text-gray-700 mb-4">Transaction History</h2>
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-y-auto">
                 {transactions.length > 0 ? (
                     <ul className="space-y-2">
                         {transactions.map((transaction, index) => (

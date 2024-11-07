@@ -1,10 +1,9 @@
 const RecentTransactionsCard = ({ transactions }) => {
     return (
-        <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col justify-between h-[200px]">
+        <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col justify-between h-[200px] max-h-[200px]">
             <h2 className="text-lg font-semibold text-gray-700 mb-4">Recent Transactions</h2>
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-y-auto">
                 {transactions.length > 0 ? (
-
                     <ul className="space-y-2">
                         {transactions.map((transaction, index) => (
                             <li key={index} className="text-sm text-gray-600">
