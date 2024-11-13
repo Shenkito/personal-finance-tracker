@@ -13,8 +13,8 @@ const AddTransactionForm = () => {
     const [newTransaction, setNewTransaction] = useState({
         amount: "",
         description: "",
-        category: "Food",
-        type: "expense"
+        category: "",
+        type: ""
     });
 
     const handleFormChange = (e) => {
@@ -35,7 +35,7 @@ const AddTransactionForm = () => {
 
         }
 
-        await addTransaction({
+        const success = await addTransaction({
 
             amount: parseFloat(newTransaction.amount),
             description: newTransaction.description,
@@ -44,14 +44,18 @@ const AddTransactionForm = () => {
 
         });
 
-        setNewTransaction({
+        if (success) {
 
-            amount: "",
-            description: "",
-            category: "Food",
-            type: "expense"
+            setNewTransaction({
 
-        });
+                amount: "",
+                description: "",
+                category: "",
+                type: ""
+
+            });
+
+        }
     };
 
     return (
@@ -80,8 +84,8 @@ const AddTransactionForm = () => {
                         value={newTransaction.category}
                         onChange={handleFormChange}
                         className="w-full mb-4 md:mb-0 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                        required
                     >
+                        <option value="" disabled hidden>Choose Category</option>
                         {categories.map((category, index) => (
                             <option key={index} value={category}>
                                 {category}
@@ -93,8 +97,8 @@ const AddTransactionForm = () => {
                         value={newTransaction.type}
                         onChange={handleFormChange}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-                        required
                     >
+                        <option value="" disabled hidden>Choose Type</option>
                         <option value="expense">Expense</option>
                         <option value="income">Income</option>
                     </select>

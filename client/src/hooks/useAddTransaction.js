@@ -13,7 +13,7 @@ const useAddTransaction = () => {
 
         const success = handleInputErrors(newTransaction);
 
-        if (!success) return;
+        if (!success) return false;
 
         try {
 
@@ -36,6 +36,10 @@ const useAddTransaction = () => {
             // Update the transactions state by adding the new transaction
             setTransactions([...transactions, createdTransaction]);
 
+            toast.success("Transaction added successfully");
+
+            return true;
+
         } catch (error) {
 
             toast.error(`Error creating transaction: ${error.message}`);
@@ -52,9 +56,9 @@ const useAddTransaction = () => {
 
 export default useAddTransaction;
 
-function handleInputErrors({ amount, description }) {
+function handleInputErrors({ amount, description, category, type }) {
 
-    if (!amount || !description) {
+    if (!amount || !description || !category || !type) {
 
         toast.error("Please fill in all required fields");
 
@@ -63,7 +67,7 @@ function handleInputErrors({ amount, description }) {
     }
 
     if (amount <= 0) {
-        
+
         toast.error("Amount should be greater than 0");
 
         return false;
