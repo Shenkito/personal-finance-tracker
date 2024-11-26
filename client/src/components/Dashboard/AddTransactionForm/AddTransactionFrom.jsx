@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAddTransaction from "../../../hooks/useAddTransaction";
+import toast from "react-hot-toast";
 
 const categories = [
     "Food", "Transport", "Entertainment", "Rent",
@@ -17,11 +18,20 @@ const AddTransactionForm = () => {
         type: ""
     });
 
+    const [errors, setErrors] = useState({
+        amount: false,
+        description: false,
+        category: false,
+        type: false,
+    });
+
     const handleFormChange = (e) => {
 
         const { name, value } = e.target;
 
         setNewTransaction((prev) => ({ ...prev, [name]: value }));
+
+        setErrors((prev) => ({ ...prev, [name]: false }));
 
     };
 
@@ -29,11 +39,46 @@ const AddTransactionForm = () => {
 
         e.preventDefault();
 
-        if (isNaN(newTransaction.amount)) {
-
-            return alert("Please enter a valid number for the amount.");
-
+        const newErrors = {
+            amount: !newTransaction.amount || isNaN(newTransaction.amount) || newTransaction.amount <= 0,
+            description: !newTransaction.description,
+            category: !newTransaction.category,
+            type: !newTransaction.type,
         }
+
+        setErrors(newErrors);
+
+        // if (isNaN(newTransaction.amount)) {
+
+        //     return alert("Please enter a valid number for the amount.");
+
+        // }
+        if (Object.values(newErrors).some((error) => error)) {
+            const fieldErrorMessages = {
+                amount: "Amount should be greater than 0",
+                description: "Description is required",
+                category: "Category is required",
+                type: "Type is required",
+            };
+        
+            // Define the desired field order
+            const fieldOrder = ["amount", "description", "category", "type"];
+        
+            // Collect all errors in the correct order
+            const errorMessages = fieldOrder
+                .filter((field) => newErrors[field]) // Filter fields with errors
+                .map((field) => fieldErrorMessages[field]); // Map to error messages
+        
+            // Show all error messages in a single toast
+            if (errorMessages.length > 0) {
+
+                toast.error(errorMessages.join("\n")); // Use line breaks to separate messages
+                
+            }
+        
+            return;
+        }
+        
 
         const success = await addTransaction({
 
@@ -68,7 +113,8 @@ const AddTransactionForm = () => {
                     value={newTransaction.amount}
                     onChange={handleFormChange}
                     placeholder="Amount"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 focus:outline-none"
+                    className={`w-full p-3 border ${errors.amount ? "border-red-500" : "border-gray-300"
+                        } rounded-lg focus:ring focus:ring-blue-200 focus:outline-none`}
                 />
                 <input
                     type="text"
@@ -76,14 +122,16 @@ const AddTransactionForm = () => {
                     value={newTransaction.description}
                     onChange={handleFormChange}
                     placeholder="Description"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 focus:outline-none"
+                    className={`w-full p-3 border ${errors.description ? "border-red-500" : "border-gray-300"
+                        } rounded-lg focus:ring focus:ring-blue-200 focus:outline-none`}
                 />
                 <div className="flex flex-col md:flex-row md:space-x-4">
                     <select
                         name="category"
                         value={newTransaction.category}
                         onChange={handleFormChange}
-                        className="w-full mb-4 md:mb-0 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+                        className={`w-full p-3 border ${errors.category ? "border-red-500" : "border-gray-300"
+                            } rounded-lg focus:ring focus:ring-blue-200 focus:outline-none`}
                     >
                         <option value="" disabled hidden>Choose Category</option>
                         {categories.map((category, index) => (
@@ -96,7 +144,8 @@ const AddTransactionForm = () => {
                         name="type"
                         value={newTransaction.type}
                         onChange={handleFormChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+                        className={`w-full p-3 border ${errors.type ? "border-red-500" : "border-gray-300"
+                            } rounded-lg focus:ring focus:ring-blue-200 focus:outline-none`}
                     >
                         <option value="" disabled hidden>Choose Type</option>
                         <option value="expense">Expense</option>
