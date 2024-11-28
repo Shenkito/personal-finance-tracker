@@ -12,9 +12,9 @@ const useEditTransaction = () => {
 
     const editTransaction = async (id, newTransaction) => {
 
-        const success = handleInputErrors(newTransaction);
+        // const success = handleInputErrors(newTransaction);
 
-        if (!success) return;
+        // if (!success) return;
 
         setLoading(true);
 
@@ -66,22 +66,22 @@ const useEditTransaction = () => {
 
 export default useEditTransaction;
 
-function handleInputErrors({ amount, description }) {
+// function handleInputErrors({ amount, description }) {
 
-    if (!amount || !description) {
+//     if (!amount || !description) {
 
-        toast.error("Please fill in all required fields");
+//         toast.error("Please fill in all required fields");
 
-        return false;
+//         return false;
 
-    }
+//     }
 
-    if (amount <= 0) {
+//     if (amount <= 0) {
         
-        toast.error("Amount should be greater than 0");
+//         toast.error("Amount should be greater than 0");
 
-        return false;
-    }
+//         return false;
+//     }
 
-    return true;
-}
+//     return true;
+// }

@@ -5,17 +5,9 @@ import { faTrashCan, faCheck, faTimes, faPen } from "@fortawesome/free-solid-svg
 import useDeleteTransaction from "../../../hooks/useDeleteTransaction";
 import useEditTransaction from "../../../hooks/useEditTransaction";
 
-// Define categories to match AddTransactionForm
 const categories = [
-    "Food",
-    "Transport",
-    "Entertainment",
-    "Rent",
-    "Utilities",
-    "Health",
-    "Shopping",
-    "Salary",
-    "Other"
+    "Food", "Transport", "Entertainment", "Rent",
+    "Utilities", "Health", "Shopping", "Salary", "Other"
 ];
 
 const TransactionHistoryCard = ({ transactions }) => {
@@ -29,6 +21,25 @@ const TransactionHistoryCard = ({ transactions }) => {
     const [formData, setFormData] = useState({ amount: '', description: '', category: '', type: '' });
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [errors, setErrors] = useState({
+        amount: false,
+        description: false,
+        category: false,
+        type: false,
+    });
+
+
+    // Unified handleFormChange function
+    const handleFormChange = (e) => {
+
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({ ...prev, [name]: value }));
+
+        setErrors((prev) => ({ ...prev, [name]: false }));
+
+    };
 
     const handleEdit = (transaction) => {
 
@@ -46,6 +57,34 @@ const TransactionHistoryCard = ({ transactions }) => {
 
     const handleSave = async (id) => {
 
+        const newErrors = {
+            amount: !formData.amount || isNaN(formData.amount) || formData.amount <= 0,
+            description: !formData.description,
+            category: !formData.category,
+            type: !formData.type,
+        };
+
+        setErrors(newErrors);
+
+        if (Object.values(newErrors).some((error) => error)) {
+            const fieldErrorMessages = {
+                amount: "Amount should be greater than 0",
+                description: "Description is required",
+                category: "Category is required",
+                type: "Type is required",
+            };
+
+            const fieldOrder = ["amount", "description", "category", "type"];
+
+            const errorMessages = fieldOrder
+                .filter((field) => newErrors[field])
+                .map((field) => fieldErrorMessages[field]);
+
+            toast.error(errorMessages.join("\n"));
+
+            return;
+        }
+
         const success = await editTransaction(id, formData);
 
         if (success) {
@@ -57,6 +96,18 @@ const TransactionHistoryCard = ({ transactions }) => {
             setFormData({ amount: '', description: '', category: '', type: '' });
 
         }
+    };
+
+    const closeModal = () => {
+
+        setIsModalOpen(false);
+
+        setEditingTransaction(null);
+
+        setFormData({ amount: '', description: '', category: '', type: '' });
+
+        setErrors({ amount: false, description: false, category: false, type: false });
+
     };
 
     const handleDelete = (id) => {
@@ -85,16 +136,6 @@ const TransactionHistoryCard = ({ transactions }) => {
             ),
             { duration: 5000 }
         );
-    };
-
-    const closeModal = () => {
-
-        setIsModalOpen(false);
-
-        setEditingTransaction(null);
-
-        setFormData({ amount: '', description: '', category: '', type: '' });
-
     };
 
     return (
@@ -133,57 +174,64 @@ const TransactionHistoryCard = ({ transactions }) => {
                 )}
             </div>
 
-            {/* Modal for Editing Transaction */}
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg w-96">
                         <h3 className="text-lg font-semibold mb-4">Edit Transaction</h3>
                         <input
                             type="number"
+                            name="amount"
                             value={formData.amount}
-                            onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                            onChange={handleFormChange}
                             placeholder="Amount"
-                            className="border p-2 rounded mb-2 w-full"
+                            className={`w-full p-2 mb-2 border ${errors.amount ? "border-red-500" : "border-gray-300"
+                                } rounded-lg focus:ring focus:ring-blue-200 focus:outline-none`}
                         />
                         <input
                             type="text"
+                            name="description"
                             value={formData.description}
-                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                            onChange={handleFormChange}
                             placeholder="Description"
-                            className="border p-2 rounded mb-2 w-full"
+                            className={`w-full p-2 mb-2 border ${errors.description ? "border-red-500" : "border-gray-300"
+                                } rounded-lg focus:ring focus:ring-blue-200 focus:outline-none`}
                         />
                         <select
+                            name="category"
                             value={formData.category}
-                            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                            className="border p-2 rounded mb-2 w-full"
+                            onChange={handleFormChange}
+                            className={`w-full p-2 mb-2 border ${errors.category ? "border-red-500" : "border-gray-300"
+                                } rounded-lg focus:ring focus:ring-blue-200 focus:outline-none`}
                         >
+                            <option value="" disabled hidden>Choose Category</option>
                             {categories.map((category, index) => (
-                                <option key={index} value={category}>
-                                    {category}
-                                </option>
+                                <option key={index} value={category}>{category}</option>
                             ))}
                         </select>
                         <select
+                            name="type"
                             value={formData.type}
-                            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                            className="border p-2 rounded mb-2 w-full"
+                            onChange={handleFormChange}
+                            className={`w-full p-2 mb-2 border ${errors.type ? "border-red-500" : "border-gray-300"
+                                } rounded-lg focus:ring focus:ring-blue-200 focus:outline-none`}
                         >
+                            <option value="" disabled hidden>Choose Type</option>
                             <option value="expense">Expense</option>
                             <option value="income">Income</option>
                         </select>
-                        <div className="flex justify-end">
-                            <button
-                                onClick={() => handleSave(editingTransaction)}
-                                className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
-                                disabled={editing}
-                            >
-                                Save
-                            </button>
+                        <div className="flex justify-end space-x-4 mt-4">
                             <button
                                 onClick={closeModal}
-                                className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 ml-2"
+                                className="bg-gray-300 text-gray-700 px-3 py-2 rounded hover:bg-gray-400"
                             >
                                 Cancel
+                            </button>
+                            <button
+                                onClick={() => handleSave(editingTransaction)}
+                                className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600"
+                                disabled={editing}
+                            >
+                                {editing ? "Saving..." : "Save"}
                             </button>
                         </div>
                     </div>

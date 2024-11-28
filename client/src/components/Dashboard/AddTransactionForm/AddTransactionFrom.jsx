@@ -60,25 +60,25 @@ const AddTransactionForm = () => {
                 category: "Category is required",
                 type: "Type is required",
             };
-        
+
             // Define the desired field order
             const fieldOrder = ["amount", "description", "category", "type"];
-        
+
             // Collect all errors in the correct order
             const errorMessages = fieldOrder
                 .filter((field) => newErrors[field]) // Filter fields with errors
                 .map((field) => fieldErrorMessages[field]); // Map to error messages
-        
+
             // Show all error messages in a single toast
             if (errorMessages.length > 0) {
 
                 toast.error(errorMessages.join("\n")); // Use line breaks to separate messages
-                
+
             }
-        
+
             return;
         }
-        
+
 
         const success = await addTransaction({
 
