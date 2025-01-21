@@ -30,7 +30,7 @@ const SignUp = () => {
     const handleFileChange = (e) => {
 
         setFile(e.target.files[0]); // Set the selected file
-        
+
     };
 
     const handleSignup = async (e) => {

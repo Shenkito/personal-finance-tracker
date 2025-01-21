@@ -3,6 +3,7 @@ import create from "zustand";
 
 const useStore = create((set) => ({
     transactions: [],
+    budgets: [],
     addTransaction: (transaction) =>
         set((state) => ({
             transactions: [...state.transactions, transaction],
@@ -16,6 +17,11 @@ const useStore = create((set) => ({
             transaction._id === updatedTransaction._id ? updatedTransaction : transaction
         ),
     })),
+    addBudget: (budget) =>
+        set((state) => ({
+            budgets: [...state.budgets, budget]
+        })),
+    setBudgets: (budgets) => set({ budgets }),
 }));
 
 export default useStore;

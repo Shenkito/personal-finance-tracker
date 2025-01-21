@@ -1,5 +1,6 @@
 import Transaction from "../models/transactionModel.js";
 import User from "../models/userModel.js";
+import Budget from "../models/budgetModel.js";
 
 export const createTransaction = async (req, res) => {
 
@@ -31,6 +32,19 @@ export const createTransaction = async (req, res) => {
         });
 
         await newTransaction.save();
+
+        if (type === "expense") {
+
+            const budget = await Budget.findOne({
+                user: req.user._id,
+                category: category,
+            });
+
+            if (budget) {
+                budget.spent += amount;
+                await budget.save();
+            }
+        }
 
         // Update the user's transactions array
         await User.findByIdAndUpdate(
@@ -125,6 +139,18 @@ export const deleteTransaction = async (req, res) => {
 
             return res.status(404).json({ error: "Transaction not found" });
 
+        }
+
+        if (transaction.type === "expense") {
+            const budget = await Budget.findOne({
+                user: req.user._id,
+                category: transaction.category,
+            });
+
+            if (budget) {
+                budget.spent -= transaction.amount;
+                await budget.save();
+            }
         }
 
         res.json({ message: "Transaction deleted successfully" });

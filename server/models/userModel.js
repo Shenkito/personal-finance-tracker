@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     transactions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Transaction'
+    }],
+    budgets: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Budget'
     }]
     // we get createdAt , updatedAt => can use for Member since. 
 }, { timestamps: true });

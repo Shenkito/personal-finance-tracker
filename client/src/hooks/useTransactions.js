@@ -28,7 +28,7 @@ const useTransactions = () => {
         } finally {
 
             setLoading(false);
-            
+
         }
     };
 

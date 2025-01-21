@@ -52,7 +52,7 @@ const useSignUp = () => {
         } finally {
 
             setLoading(false);
-            
+
         }
     };
 
