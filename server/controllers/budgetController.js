@@ -16,7 +16,7 @@ export const createBudget = async (req, res) => {
             category,
             limit,
             startDate,
-            endDate,
+            endDate: new Date("12.03.2025"),
             user: req.user._id
         });
 

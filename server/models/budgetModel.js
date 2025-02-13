@@ -18,13 +18,10 @@ const budgetSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    // startDate: {
-    //     type: Date,
-    //     default: Date.now,
-    // },
-    // endDate: {
-    //     type: Date
-    // },
+    endDate: {
+        type: String,
+        required: true
+    }
 }, { timestamps: true });
 
 const Budget = mongoose.model("Budget", budgetSchema);
