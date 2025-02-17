@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useStore from "../store/useStore";
-
 import toast from "react-hot-toast";
 
 const useAddBudget = () => {

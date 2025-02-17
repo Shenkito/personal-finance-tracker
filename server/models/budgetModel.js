@@ -19,7 +19,7 @@ const budgetSchema = new mongoose.Schema({
         default: 0,
     },
     endDate: {
-        type: String,
+        type: Date,
         required: true
     }
 }, { timestamps: true });

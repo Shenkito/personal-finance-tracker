@@ -2,6 +2,7 @@ import useBudgets from "../../hooks/useBudgets";
 import LoadingSpinner from "../../components/Common/LoadingSpinner/LoadingSpinner";
 
 import BudgetCard from "../../components/Budgets/BudgetCard/BudgetCard";
+import AddBudgetForm from "../../components/Budgets/AddBudgetForm/AddBudgetForm";
 
 const Budgets = () => {
 
@@ -15,6 +16,7 @@ const Budgets = () => {
 
             <div className="">
                 <BudgetCard budgets={budgets} />
+                <AddBudgetForm />
             </div>
         </div>
     )
