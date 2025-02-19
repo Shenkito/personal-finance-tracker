@@ -79,7 +79,6 @@ const AddTransactionForm = () => {
             return;
         }
 
-
         const success = await addTransaction({
 
             amount: parseFloat(newTransaction.amount),

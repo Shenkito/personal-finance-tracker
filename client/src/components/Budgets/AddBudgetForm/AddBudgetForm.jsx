@@ -63,7 +63,6 @@ const AddBudgetForm = () => {
                 toast.error(errorMessages.join("\n"));
             }
 
-
             return;
         }
 
