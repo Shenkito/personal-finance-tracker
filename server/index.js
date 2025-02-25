@@ -19,8 +19,8 @@ dotenv.config();
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-const __dirname = path.resolve();
+const __dirname1 = path.dirname(__filename);
+const __dirname2 = path.resolve();
 
 
 ensureUploadsFolder()
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Serve static files from the uploads folder
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname1, "uploads")));
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -40,10 +40,10 @@ app.use("/api/budgets", budgetRoutes)
 
 const PORT = process.env.PORT || 5000;
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
+app.use(express.static(path.join(__dirname2, "/client/dist")));
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+    res.sendFile(path.join(__dirname2, "client", "dist", "index.html"));
 })
 
 app.listen(PORT, () => {
