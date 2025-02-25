@@ -4,7 +4,7 @@ const ProfilePicture = ({ className }) => {
     const { authUser } = useAuthContext();
 
     const profilePicUrl = authUser?.profilePicture
-        ? `https://your-app.onrender.com/uploads/${authUser.profilePicture}`
+        ? `https://personal-finance-tracker-s9jx/uploads/${authUser.profilePicture}`
         : "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg";
 
     return (
