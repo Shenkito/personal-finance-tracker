@@ -30,7 +30,11 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Serve static files from the uploads folder
-app.use("/uploads", express.static(path.join(__dirname1, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname1, "uploads"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cache-Control", "no-store"); // Prevent caching
+    }
+  }));
 
 // Routes
 app.use("/api/auth", authRoutes);
