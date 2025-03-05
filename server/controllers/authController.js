@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
 import generateTokenAndSetCookie from "../utils/generateToken.js";
+import cloudinary from "../utils/cloudinaryConfig.js";
 
 export const signUp = async (req, res) => {
 
@@ -27,13 +28,22 @@ export const signUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, salt);
 
+        let profilePictureUrl = '';
+
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path, {
+                folder: "profile_pictures",
+            });
+            profilePictureUrl = result.secure_url; // Save the Cloudinary URL
+        }
+
         const newUser = new User({
 
             fullName: fullName,
             username: username,
             email: email,
             password: hashedPassword,
-            profilePicture
+            profilePicture: profilePictureUrl
 
         });
 

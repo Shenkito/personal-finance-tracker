@@ -4,13 +4,13 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import { ensureUploadsFolder } from "./utils/ensureUploadsFolder.js";
-import { fileURLToPath } from "url";
+// import { ensureUploadsFolder } from "./utils/ensureUploadsFolder.js";
+// import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/authRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 import budgetRoutes from "./routes/budgetRoutes.js"
-// import uploadRoutes from "./routes/uploadRoutes.js"
+import uploadRoutes from "./routes/uploadRoutes.js"
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
 
@@ -18,23 +18,23 @@ dotenv.config();
 
 const app = express();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-ensureUploadsFolder()
+// ensureUploadsFolder()
 
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
 // Serve static files from the uploads folder
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/budgets", budgetRoutes)
-// app.use("/api/upload", uploadRoutes)
+app.use("/api/upload", uploadRoutes)
 
 const PORT = process.env.PORT || 5000;
 
