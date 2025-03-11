@@ -1,5 +1,8 @@
 import Budget from "../models/budgetModel.js";
 import User from "../models/userModel.js";
+import Transaction from "../models/transactionModel.js";
+
+import { calculateSpentFromExistingTransactions } from "../utils/calculateSpentFromExistingTransactions.js";
 
 export const createBudget = async (req, res) => {
     try {
@@ -12,12 +15,27 @@ export const createBudget = async (req, res) => {
 
         }
 
+        const existingBudget = await Budget.findOne({ user: req.user._id, category });
+
+        if (existingBudget) {
+            return res.status(400).json({error: "Budget for this category already exists"});
+        };
+
+        const transactions = await Transaction.find({
+            user: req.user._id,
+            category,
+            type: "expense"
+        });
+
+        const totalSpentExistingTransactions = calculateSpentFromExistingTransactions(transactions)
+
         const newBudget = new Budget({
             category,
             limit,
             startDate,
             endDate,
-            user: req.user._id
+            user: req.user._id,
+            spent: totalSpentExistingTransactions
         });
 
         await newBudget.save();
