@@ -18,7 +18,7 @@ export const createBudget = async (req, res) => {
         const existingBudget = await Budget.findOne({ user: req.user._id, category });
 
         if (existingBudget) {
-            return res.status(400).json({error: "Budget for this category already exists"});
+            return res.status(400).json({ error: "Budget for this category already exists" });
         };
 
         const transactions = await Transaction.find({
