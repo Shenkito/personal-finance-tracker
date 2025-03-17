@@ -1,8 +1,6 @@
 # Personal Finance Tracker 
 
-## 🚧 Project Status  
-
-This project is **currently under active development**. Some features may be incomplete or subject to change. Stay tuned for updates! 🚀  
+## 🚧 Project Status  This project is **currently under active development**. Some features may be incomplete or subject to change. Stay tuned for updates! 🚀  
 
 Personal Finance Tracker is a full-stack web application designed to help users manage their income, expenses, and financial goals effectively. It allows users to track transactions, categorize expenses and incomes, and visualize their financial data using charts.
 
