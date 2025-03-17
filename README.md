@@ -1,4 +1,8 @@
-# Personal Finance Tracker
+# Personal Finance Tracker 
+
+## 🚧 Project Status  
+
+This project is **currently under active development**. Some features may be incomplete or subject to change. Stay tuned for updates! 🚀  
 
 Personal Finance Tracker is a full-stack web application designed to help users manage their income, expenses, and financial goals effectively. It allows users to track transactions, categorize expenses and incomes, and visualize their financial data using charts.
 
@@ -33,8 +37,8 @@ Open your browser and navigate to (https://personal-finance-tracker-b479.onrende
 - **Budget Tracking**: Set budgets and track spending limits.
 - **Charts**: Visualize financial data using Recharts.
 - **Cloud Storage**: Securely upload images as profile picture using Cloudinary.
-- **Responsive UI:**: Securely upload images as profile picture using Cloudinary.
-- **Error Handling**: Optimized for mobile and desktop using TailwindCSS.
+- **Responsive UI**: Optimized for mobile and desktop using TailwindCSS.
+- **Error Handling**: Client and server-side error handling with React Hot Toast.
 
 ## 🖥️ Tech Stack  
 
@@ -67,9 +71,10 @@ Open your browser and navigate to (https://personal-finance-tracker-b479.onrende
 | `multer-storage-cloudinary` | Cloudinary file storage adapter |
 
 ### ⚙️ Development & Deployment  
-| Library | Purpose |
-|---------|---------|
+| Tool/Service | Purpose |
+|--------------|---------|
 | `vite` | Fast frontend bundling |
 | `nodemon` | Auto-restarts backend on changes |
 | `eslint` | Code linting |
 | `postcss` | CSS processing |
+| **Deployment** | Hosted on [Render](https://render.com/) |
